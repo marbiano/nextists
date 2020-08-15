@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import DefaultErrorPage from 'next/error';
 import { Person } from '../../lib/types';
 import { fetchAllPeople, fetchPersonByHandle } from '../../lib/api';
+import Layout from '../../components/Layout';
 
 interface PageProps {
   person: Person;
@@ -23,13 +24,17 @@ const ResourcePage: React.FC<PageProps> = ({ person }) => {
   const { fields } = person;
 
   return (
-    <>
-      <h1>{fields.name}</h1>
-      <div>
-        Twitter:{' '}
-        <a href={`https://twitter.com/${fields.handle}`}>{fields.handle}</a>
+    <Layout>
+      <h3 className="text-xl mt-16">{fields.name}</h3>
+      <div className="text-l hover:underline">
+        <a
+          href={`https://twitter.com/${fields.handle}`}
+          className="text-blue-500"
+        >
+          @{fields.handle}
+        </a>
       </div>
-    </>
+    </Layout>
   );
 };
 

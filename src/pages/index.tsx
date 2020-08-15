@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
 import { Person } from '../lib/types';
 import { fetchAllPeople } from '../lib/api';
+import Layout from '../components/Layout';
 
 interface PageProps {
   people: Person[];
@@ -9,22 +10,17 @@ interface PageProps {
 
 const IndexPage: React.FC<PageProps> = ({ people }) => {
   return (
-    <>
-      <h1>Nextists</h1>
-      <h2>
-        Public list of <a href="https://nextjs.org">Next.js</a> developers
-        available for hire
-      </h2>
-      <ul>
+    <Layout>
+      <ul className="divide-y divide-gray-400 w-2/5">
         {people.map(({ id, fields }) => (
-          <li key={id}>
+          <li key={id} className="leading-10 hover:bg-gray-100 pl-4">
             <Link href={`/people/${fields.handle}`}>
-              <a>{fields.name}</a>
+              <a className="hover:text-pink-600 block">{fields.name}</a>
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </Layout>
   );
 };
 
